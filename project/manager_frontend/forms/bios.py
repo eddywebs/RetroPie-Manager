@@ -95,7 +95,7 @@ class BiosUploadForm(CrispyFormMixin, forms.Form):
             name = os.path.basename(bios.name)
             
             if name not in simple_manifest:
-                raise forms.ValidationError(_("Your file does not seem to be a supported Bios"))
+                continue #raise forms.ValidationError(_("Your file does not seem to be a supported Bios"))
             else:
                 bios_checksum = hashfile(bios, hashlib.md5())
                 if bios_checksum != simple_manifest[name]:
