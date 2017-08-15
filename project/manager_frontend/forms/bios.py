@@ -94,12 +94,12 @@ class BiosUploadForm(CrispyFormMixin, forms.Form):
             simple_manifest = {values[0]: md5hash for md5hash,values in self.manifest.items()}
             name = os.path.basename(bios.name)
             
-            if name not in simple_manifest:
-                continue #raise forms.ValidationError(_("Your file does not seem to be a supported Bios"))
-            else:
-                bios_checksum = hashfile(bios, hashlib.md5())
-                if bios_checksum != simple_manifest[name]:
-                    raise forms.ValidationError(_("Your file does not have a correct MD5 checksum"))
+            #if name not in simple_manifest:
+                #continue #raise forms.ValidationError(_("Your file does not seem to be a supported Bios"))
+            #else:
+            bios_checksum = hashfile(bios, hashlib.md5())
+            if bios_checksum != simple_manifest[name]:
+                raise forms.ValidationError(_("Incorrect File ! Your file does not have a correct MD5 checksum"))
 
 
         return bios
